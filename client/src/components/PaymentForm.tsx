@@ -4,7 +4,11 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { ShoppingCart } from "lucide-react";
 import Image from "next/image";
 
-const PaymentForm = () => {
+const PaymentForm = ({
+   setPaymentForm,
+}: {
+   setPaymentForm: (data: PaymentFormInputs) => void;
+}) => {
    const {
       register,
       handleSubmit,
@@ -14,7 +18,7 @@ const PaymentForm = () => {
    });
 
    const handlePaymentForm: SubmitHandler<PaymentFormInputs> = (data) => {
-      // handle payment submission
+      setPaymentForm(data);
    };
 
    return (
