@@ -2,11 +2,11 @@
 
 import PaymentForm from "@/components/PaymentForm";
 import ShippingForm from "@/components/ShippingForm";
-import { CartItemsType, ShippingFormInputs } from "@/types";
+import { CartItemsType, PaymentFormInputs, ShippingFormInputs } from "@/types";
 import { ArrowRight, Trash2 } from "lucide-react";
 import Image from "next/image";
 import { useSearchParams, useRouter } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
 
 const steps = [
    { id: 1, title: "Shopping Cart" },
@@ -74,8 +74,12 @@ const cartItems: CartItemsType = [
 const CartPage = () => {
    const searchParams = useSearchParams();
    const router = useRouter();
-   const [shippingForm, setShippingForm] =
-      React.useState<ShippingFormInputs | null>(null);
+   const [shippingForm, setShippingForm] = useState<ShippingFormInputs | null>(
+      null,
+   );
+   const [paymentForm, setPaymentForm] = useState<PaymentFormInputs | null>(
+      null,
+   );
 
    const activeStep = parseInt(searchParams.get("step") || "1");
 
@@ -157,7 +161,7 @@ const CartPage = () => {
                ) : activeStep === 2 ? (
                   <ShippingForm setShippingForm={setShippingForm} />
                ) : activeStep === 3 && shippingForm ? (
-                  <PaymentForm />
+                  <PaymentForm setPaymentForm={setPaymentForm} />
                ) : (
                   <p className="text-sm text-gray-500">
                      Please fill in the shipping form to Continue
