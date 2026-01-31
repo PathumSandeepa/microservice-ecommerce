@@ -6,6 +6,7 @@ import Image from "next/image";
 import { ShoppingCart } from "lucide-react";
 import { useState } from "react";
 import useCartStore from "@/stores/cartStore";
+import { toast } from "react-toastify";
 
 const ProductCard = ({ product }: { product: ProductType }) => {
    const [productTypes, setProductTypes] = useState({
@@ -35,6 +36,7 @@ const ProductCard = ({ product }: { product: ProductType }) => {
          selectedSize: productTypes.size,
          selectedColor: productTypes.color,
       });
+      toast.success("Product added to cart!");
    };
 
    return (
